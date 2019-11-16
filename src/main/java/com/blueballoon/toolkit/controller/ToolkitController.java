@@ -134,7 +134,7 @@ public class ToolkitController {
     }
 
     /**
-     * 两组独立样本率比较
+     * 单组率与固定值比较
      *
      * @param ratioAndConstant_testGroup_pai_1 试验组的率 Π1
      * @param ratioAndConstant_base_pai_0      基线率Π0

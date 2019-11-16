@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 
 /**
- * The type Toolkit controller.
+ *  实用工具接口层
  *
  * @author hanzhen
- * @description： 工具类
- * @date 2019 /11/14
+ * @since  2019 /11/14
  */
 @RestController
 @RequestMapping("/tool/")

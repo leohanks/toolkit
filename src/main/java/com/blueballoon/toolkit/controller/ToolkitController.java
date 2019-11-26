@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 
 /**
- * The type Toolkit controller.
+ *  实用工具接口层
  *
  * @author hanzhen
- * @description： 工具类
- * @date 2019 /11/14
+ * @since  2019 /11/14
  */
 @RestController
 @RequestMapping("/tool/")
@@ -137,7 +136,7 @@ public class ToolkitController {
     }
 
     /**
-     * 两组独立样本率比较
+     * 单组率与固定值比较
      *
      * @param ratioAndConstant_testGroup_pai_1 试验组的率 Π1
      * @param ratioAndConstant_base_pai_0      基线率Π0

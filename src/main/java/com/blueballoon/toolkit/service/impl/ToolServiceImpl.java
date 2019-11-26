@@ -26,9 +26,16 @@ public class ToolServiceImpl implements ToolService {
 
     private static final BigDecimal ONE = new BigDecimal("1");
     private static final BigDecimal TWO = new BigDecimal("2");
+    
+    private static final Integer BIGGER_THAN = 1;
+    private static final String EXAM_PARAM_IS_INVALID = "α和β均应小于或等于1";
 
     @Override
     public String compareMeanAndConst(BigDecimal difference, BigDecimal std, Integer lateral, BigDecimal exam_a, BigDecimal exam_b) {
+        if (!examStandParamIsValid(exam_a, exam_b)) {
+            return EXAM_PARAM_IS_INVALID;
+        }
+        
         //计算Z分布
         if (new Integer(1).equals(lateral)) {
             exam_a = exam_a.divide(TWO, DEF_DIV_SCALE, BigDecimal.ROUND_HALF_UP);
@@ -63,6 +70,10 @@ public class ToolServiceImpl implements ToolService {
 
     @Override
     public String compareIndependenceMean(BigDecimal uT, BigDecimal uC, BigDecimal combineStd, Integer lateral, BigDecimal exam_a, BigDecimal exam_b, BigDecimal r) {
+        if (!examStandParamIsValid(exam_a, exam_b)) {
+            return EXAM_PARAM_IS_INVALID;
+        }
+        
         //计算Z分布
         if (new Integer(1).equals(lateral)) {
             exam_a = exam_a.divide(TWO, DEF_DIV_SCALE, BigDecimal.ROUND_HALF_UP);
@@ -110,6 +121,10 @@ public class ToolServiceImpl implements ToolService {
 
     @Override
     public String compareNonInferiority(BigDecimal testGroupMean, BigDecimal controlGroupMean, BigDecimal combineStdNonInferiority, BigDecimal dividingValue, BigDecimal nonInferiority_a, BigDecimal nonInferiority_b, BigDecimal nonInferiorityR) {
+        if (!examStandParamIsValid(nonInferiority_a, nonInferiority_b)) {
+            return EXAM_PARAM_IS_INVALID;
+        }
+        
         //计算Z分布
         Double zA = getInverseCumulativeProbability(nonInferiority_a);
         Double zB = getInverseCumulativeProbability(nonInferiority_b);
@@ -152,6 +167,10 @@ public class ToolServiceImpl implements ToolService {
                                          BigDecimal superiorityTest_a,
                                          BigDecimal superiorityTest_b,
                                          BigDecimal superiorityTestR) {
+        if (!examStandParamIsValid(superiorityTest_a, superiorityTest_b)) {
+            return EXAM_PARAM_IS_INVALID;
+        }
+        
         //计算Z分布
         Double zA = getInverseCumulativeProbability(superiorityTest_a);
         Double zB = getInverseCumulativeProbability(superiorityTest_b);
@@ -197,6 +216,10 @@ public class ToolServiceImpl implements ToolService {
                                           Integer ratioAndConstant_lateral,
                                           BigDecimal ratioAndConstant_a,
                                           BigDecimal ratioAndConstant_b) {
+        if (!examStandParamIsValid(ratioAndConstant_a, ratioAndConstant_b)) {
+            return EXAM_PARAM_IS_INVALID;
+        }
+        
         //计算Z分布
         if (new Integer(1).equals(ratioAndConstant_lateral)) {
             ratioAndConstant_a = ratioAndConstant_a.divide(TWO, DEF_DIV_SCALE, BigDecimal.ROUND_HALF_UP);
@@ -239,6 +262,10 @@ public class ToolServiceImpl implements ToolService {
                                            BigDecimal independenceRatio_a,
                                            BigDecimal independenceRatio_b,
                                            BigDecimal independenceRatioR) {
+        if (!examStandParamIsValid(independenceRatio_a, independenceRatio_b)) {
+            return EXAM_PARAM_IS_INVALID;
+        }
+        
         //计算Z分布
         if (new Integer(1).equals(independenceRatio_lateral)) {
             independenceRatio_a = independenceRatio_a.divide(TWO, DEF_DIV_SCALE, BigDecimal.ROUND_HALF_UP);
@@ -286,6 +313,10 @@ public class ToolServiceImpl implements ToolService {
                                                          BigDecimal irni_a,
                                                          BigDecimal irni_b,
                                                          BigDecimal irniR) {
+        if (!examStandParamIsValid(irni_a, irni_b)) {
+            return EXAM_PARAM_IS_INVALID;
+        }
+        
         //计算Z分布
         Double zA = getInverseCumulativeProbability(irni_a);
         Double zB = getInverseCumulativeProbability(irni_b);
@@ -326,6 +357,10 @@ public class ToolServiceImpl implements ToolService {
 
     @Override
     public String compareIndependenceRatioSuperiorityTest(BigDecimal irst_testGroup_pi_T, BigDecimal irst_controlGroup_pi_C, BigDecimal irstDividingValue, BigDecimal irst_a, BigDecimal irst_b, BigDecimal irstR) {
+        if (!examStandParamIsValid(irst_a, irst_b)) {
+            return EXAM_PARAM_IS_INVALID;
+        }
+        
         //计算Z分布
         Double zA = getInverseCumulativeProbability(irst_a);
         Double zB = getInverseCumulativeProbability(irst_b);
@@ -369,6 +404,10 @@ public class ToolServiceImpl implements ToolService {
                                                           BigDecimal ssbcv_ErrorRange,
                                                           Integer ssbcv_lateral,
                                                           BigDecimal ssbcv_a) {
+        if (ssbcv_a.compareTo(ONE) == BIGGER_THAN) {
+            return "α应小于或等于1";
+        }
+        
         //计算Z分布
         if (new Integer(1).equals(ssbcv_lateral)) {
             ssbcv_a = ssbcv_a.divide(TWO, DEF_DIV_SCALE, BigDecimal.ROUND_HALF_UP);
@@ -430,5 +469,24 @@ public class ToolServiceImpl implements ToolService {
         Double sqrtX = Math.sqrt(xDouble);
 
         return new BigDecimal(Double.toString(sqrtX));
+    }
+
+    /**
+     * 校验检验水准数值范围
+     * 就这一个方法，懒得大动干戈了
+     * @param exam_a 检验水准a
+     * @param exam_b 检验水准b
+     * @return Boolean
+     */
+    private Boolean examStandParamIsValid(BigDecimal exam_a, BigDecimal exam_b) {
+        if (exam_a.compareTo(ONE) ==BIGGER_THAN) {
+            return Boolean.FALSE;
+        }
+        
+        if (exam_b.compareTo(ONE) == BIGGER_THAN) {
+            return Boolean.FALSE;
+        }
+        
+        return Boolean.TRUE;
     }
 }

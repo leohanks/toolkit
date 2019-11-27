@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  * @since  2019 /11/14
  */
 @RestController
-@RequestMapping("/tool/")
+@RequestMapping(value = "/tool/")
 public class ToolkitController {
     @Autowired
     private ToolService toolsService;
@@ -34,7 +34,7 @@ public class ToolkitController {
      * @param exam_b              检验水准b
      * @return string
      */
-    @GetMapping(value = "compareMeanAndConst")
+    @GetMapping(value = "compareMeanAndConst", produces = {"text/html; charset=GB2312"})
     public String compareMeanAndConst(
             @RequestParam(value = "difference", required = true, defaultValue = "0") BigDecimal difference,
             @RequestParam(value = "std", required = true, defaultValue = "0") BigDecimal std,
@@ -60,7 +60,7 @@ public class ToolkitController {
      * @param independenceMeanR      试验组与对照组样本量之比
      * @return string
      */
-    @GetMapping(value = "compareIndependenceMean")
+    @GetMapping(value = "compareIndependenceMean", produces = {"text/html; charset=GB2312"})
     public String compareIndependenceMean(
             @RequestParam(value = "uT", required = true, defaultValue = "0") BigDecimal uT,
             @RequestParam(value = "uC", required = true, defaultValue = "0") BigDecimal uC,
@@ -89,7 +89,7 @@ public class ToolkitController {
      * @param nonInferiorityR          试验组与对照组样本量之比r
      * @return string
      */
-    @GetMapping(value = "compareNonInferiority")
+    @GetMapping(value = "compareNonInferiority", produces = {"text/html; charset=GB2312"})
     public String compareNonInferiority(
             @RequestParam(value = "testGroupMean", required = true, defaultValue = "0") BigDecimal testGroupMean,
             @RequestParam(value = "controlGroupMean", required = true, defaultValue = "0") BigDecimal controlGroupMean,
@@ -118,7 +118,7 @@ public class ToolkitController {
      * @param superiorityTestR                        试验组与对照组样本量之比
      * @return string
      */
-    @GetMapping(value = "compareSuperiorityTest")
+    @GetMapping(value = "compareSuperiorityTest", produces = {"text/html; charset=GB2312"})
     public String compareSuperiorityTest(
             @RequestParam(value = "superiorityTestTestGroupMean", required = true, defaultValue = "0") BigDecimal superiorityTestTestGroupMean,
             @RequestParam(value = "superiorityTestControlGroupMean", required = true, defaultValue = "0") BigDecimal superiorityTestControlGroupMean,
@@ -145,7 +145,7 @@ public class ToolkitController {
      * @param ratioAndConstant_b               检验水准b
      * @return string
      */
-    @GetMapping(value = "compareRatioAndConstant")
+    @GetMapping(value = "compareRatioAndConstant", produces = {"text/html; charset=GB2312"})
     public String compareRatioAndConstant(
             @RequestParam(value = "ratioAndConstant_testGroup_pai_1", required = true, defaultValue = "0") BigDecimal ratioAndConstant_testGroup_pai_1,
             @RequestParam(value = "ratioAndConstant_base_pai_0", required = true, defaultValue = "0") BigDecimal ratioAndConstant_base_pai_0,
@@ -171,7 +171,7 @@ public class ToolkitController {
      * @param independenceRatioR                  试验组与对照组样本量之比r
      * @return string
      */
-    @GetMapping(value = "compareIndependenceRatio")
+    @GetMapping(value = "compareIndependenceRatio", produces = {"text/html; charset=GB2312"})
     public String compareIndependenceRatio(
             @RequestParam(value = "independenceRatio_testGroup_pi_T", required = true, defaultValue = "0") BigDecimal independenceRatio_testGroup_pi_T,
             @RequestParam(value = "independenceRatio_controlGroup_pi_C", required = true, defaultValue = "0") BigDecimal independenceRatio_controlGroup_pi_C,
@@ -198,7 +198,7 @@ public class ToolkitController {
      * @param irniR                  试验组与对对照组样本量之比 r
      * @return string
      */
-    @GetMapping(value = "compareIndependenceRatioNonInferiority")
+    @GetMapping(value = "compareIndependenceRatioNonInferiority", produces = {"text/html; charset=GB2312"})
     public String compareIndependenceRatioNonInferiority(
             @RequestParam(value = "irni_testGroup_pi_T", required = true, defaultValue = "0") BigDecimal irni_testGroup_pi_T,
             @RequestParam(value = "irni_controlGroup_pi_C", required = true, defaultValue = "0") BigDecimal irni_controlGroup_pi_C,
@@ -225,7 +225,7 @@ public class ToolkitController {
      * @param irstR                  试验组与对对照组样本量之比 r
      * @return string
      */
-    @GetMapping(value = "compareIndependenceRatioSuperiorityTest")
+    @GetMapping(value = "compareIndependenceRatioSuperiorityTest", produces = {"text/html; charset=GB2312"})
     public String compareIndependenceRatioSuperiorityTest(
             @RequestParam(value = "irst_testGroup_pi_T", required = true, defaultValue = "0") BigDecimal irst_testGroup_pi_T,
             @RequestParam(value = "irst_controlGroup_pi_C", required = true, defaultValue = "0") BigDecimal irst_controlGroup_pi_C,
@@ -250,7 +250,7 @@ public class ToolkitController {
      * @param ssbcv_a           检验水准 a
      * @return string
      */
-    @GetMapping(value = "estimationSamplSizeByClassifiedVariable")
+    @GetMapping(value = "estimationSamplSizeByClassifiedVariable", produces = {"text/html; charset=GB2312"})
     public String estimationSamplSizeByClassifiedVariable(
             @RequestParam(value = "ssbcv_Sensibility", required = true, defaultValue = "0") BigDecimal ssbcv_Sensibility,
             @RequestParam(value = "ssbcv_ErrorRange", required = true, defaultValue = "0") BigDecimal ssbcv_ErrorRange,

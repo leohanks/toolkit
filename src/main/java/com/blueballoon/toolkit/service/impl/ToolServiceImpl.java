@@ -28,7 +28,7 @@ public class ToolServiceImpl implements ToolService {
     private static final BigDecimal TWO = new BigDecimal("2");
     
     private static final Integer BIGGER_THAN = 1;
-    private static final String EXAM_PARAM_IS_INVALID = "α和β均应小于或等于1";
+    private static final String EXAM_PARAM_IS_INVALID = "非法参数";
 
     @Override
     public String compareMeanAndConst(BigDecimal difference, BigDecimal std, Integer lateral, BigDecimal exam_a, BigDecimal exam_b) {
@@ -61,7 +61,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             nBigDecimal = topPart.divide(sqDifferenceBigDecimal, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("样本均值与固定值（总体均值）比较的差不能为0");
+            throw new ServiceException("非法参数");
         }
 
         //向上取整
@@ -100,7 +100,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             mainCapter = mainTop.divide(sqBottom, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("uT与uC之差，不能为0");
+            throw new ServiceException("非法参数");
         }
 
         //计算r+1
@@ -110,7 +110,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             rCapter = rTop.divide(r, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("试验组与对照组样本量之比，不能为0");
+            throw new ServiceException("非法参数");
         }
 
         //得到样本量
@@ -204,7 +204,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             nBigDecimal = allTop.divide(allBottom, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("公式分母部分不能为0");
+            throw new ServiceException("非法参数");
         }
 
         return getIntegerFromBigDecimal(nBigDecimal);
@@ -249,7 +249,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             nBigDecimal = top.divide(bottom, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("试验组率与基线率之差不能为0");
+            throw new ServiceException("非法参数");
         }
 
         return getIntegerFromBigDecimal(nBigDecimal);
@@ -285,7 +285,7 @@ public class ToolServiceImpl implements ToolService {
             piC = ONE.subtract(independenceRatio_controlGroup_pi_C).multiply(independenceRatio_controlGroup_pi_C)
                     .divide(independenceRatioR, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("试验组与对照组样本量之比r，不能为0");
+            throw new ServiceException("非法参数");
         }
         BigDecimal piTAndC = piT.add(piC);
 
@@ -300,7 +300,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             nBigDecimal = top.divide(sqPiSubC, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("试验组率与对照组率之差不能为0");
+            throw new ServiceException("非法参数");
         }
 
         return getIntegerFromBigDecimal(nBigDecimal);
@@ -338,7 +338,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             piT = ONE.subtract(irni_testGroup_pi_T).multiply(irni_testGroup_pi_T).divide(irniR, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("试验组与对对照组样本量之比 r，不能为0");
+            throw new ServiceException("非法参数");
         }
         BigDecimal piCAndPiT = piC.add(piT);
 
@@ -349,7 +349,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             nBigDecimal = top.divide(sqPiTSubPiCSubDividingValue, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("公式分母部分不能为0");
+            throw new ServiceException("非法参数");
         }
 
         return getIntegerFromBigDecimal(nBigDecimal);
@@ -382,7 +382,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             piT = ONE.subtract(irst_testGroup_pi_T).multiply(irst_testGroup_pi_T).divide(irstR, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("试验组与对对照组样本量之比 r，不能为0");
+            throw new ServiceException("非法参数");
         }
         BigDecimal piCAndPiT = piC.add(piT);
 
@@ -393,7 +393,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             nBigDecimal = top.divide(sqPiTSubPiCSubDividingValue, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("公式分母部分，不能为0");
+            throw new ServiceException("非法参数");
         }
 
         return getIntegerFromBigDecimal(nBigDecimal);
@@ -405,7 +405,7 @@ public class ToolServiceImpl implements ToolService {
                                                           Integer ssbcv_lateral,
                                                           BigDecimal ssbcv_a) {
         if (ssbcv_a.compareTo(ONE) == BIGGER_THAN) {
-            return "α应小于或等于1";
+            return "非法参数";
         }
         
         //计算Z分布
@@ -429,7 +429,7 @@ public class ToolServiceImpl implements ToolService {
         try {
             nBigDecimal = top.divide(sqErrorRange, DEF_DIV_SCALE, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            throw new ServiceException("灵敏度估计误差范围，不能为0");
+            throw new ServiceException("非法参数");
         }
 
         return getIntegerFromBigDecimal(nBigDecimal);
@@ -444,7 +444,7 @@ public class ToolServiceImpl implements ToolService {
             Double z = d.inverseCumulativeProbability(ONE.subtract(exam).doubleValue());
             return z;
         } catch (OutOfRangeException e) {
-            throw new ServiceException("请检查检验水准填写是否正确");
+            throw new ServiceException("非法参数");
         }
     }
 

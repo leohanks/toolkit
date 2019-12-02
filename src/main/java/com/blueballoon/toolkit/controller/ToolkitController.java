@@ -43,7 +43,7 @@ public class ToolkitController {
             @RequestParam(value = "exam_b", required = true, defaultValue = "0") BigDecimal exam_b) {
         try {
             return toolsService.compareMeanAndConst(difference, std, meanAndConstLateral, exam_a, exam_b);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }
@@ -72,7 +72,7 @@ public class ToolkitController {
     ) {
         try {
             return toolsService.compareIndependenceMean(uT, uC, combineStd, independenceLateral, independenceMeanExam_a, independenceMeanExam_b, independenceMeanR);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }
@@ -101,7 +101,7 @@ public class ToolkitController {
     ) {
         try {
             return toolsService.compareNonInferiority(testGroupMean, controlGroupMean, combineStdNonInferiority, dividingValue, nonInferiority_a, nonInferiority_b, nonInferiorityR);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }
@@ -130,7 +130,7 @@ public class ToolkitController {
     ) {
         try {
             return toolsService.compareSuperiorityTest(superiorityTestTestGroupMean, superiorityTestControlGroupMean, superiorityTestCombineStdNonInferiority, superiorityTestDividingValue, superiorityTest_a, superiorityTest_b, superiorityTestR);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }
@@ -155,7 +155,7 @@ public class ToolkitController {
     ) {
         try {
             return toolsService.compareRatioAndConstant(ratioAndConstant_testGroup_pai_1, ratioAndConstant_base_pai_0, ratioAndConstant_lateral, ratioAndConstant_a, ratioAndConstant_b);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }
@@ -182,7 +182,7 @@ public class ToolkitController {
     ) {
         try {
             return toolsService.compareIndependenceRatio(independenceRatio_testGroup_pi_T, independenceRatio_controlGroup_pi_C, independenceRatio_lateral, independenceRatio_a, independenceRatio_b, independenceRatioR);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }
@@ -209,7 +209,7 @@ public class ToolkitController {
     ) {
         try {
             return toolsService.compareIndependenceRatioNonInferiority(irni_testGroup_pi_T, irni_controlGroup_pi_C, irniDividingValue, irni_a, irni_b, irniR);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }
@@ -236,7 +236,7 @@ public class ToolkitController {
     ) {
         try {
             return toolsService.compareIndependenceRatioSuperiorityTest(irst_testGroup_pi_T, irst_controlGroup_pi_C, irstDividingValue, irst_a, irst_b, irstR);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }
@@ -259,7 +259,7 @@ public class ToolkitController {
     ) {
         try {
             return toolsService.estimationSamplSizeByClassifiedVariable(ssbcv_Sensibility, ssbcv_ErrorRange, ssbcv_lateral, ssbcv_a);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             return INVALID_PARAM;
         }
     }

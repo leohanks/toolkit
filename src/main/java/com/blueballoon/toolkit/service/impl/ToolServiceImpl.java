@@ -232,9 +232,9 @@ public class ToolServiceImpl implements ToolService {
         BigDecimal zBBigDecimal = new BigDecimal(Double.toString(zB));
 
         //计算检验水准a的top
-        BigDecimal topA = zABigDecimal.multiply(getRadicalByPai(ratioAndConstant_testGroup_pai_1));
+        BigDecimal topA = zABigDecimal.multiply(getRadicalByPai(ratioAndConstant_base_pai_0));
         //计算检验水准b的top
-        BigDecimal topB = zBBigDecimal.multiply(getRadicalByPai(ratioAndConstant_base_pai_0));
+        BigDecimal topB = zBBigDecimal.multiply(getRadicalByPai(ratioAndConstant_testGroup_pai_1));
         //计算topA+topB
         BigDecimal topAddRes = topA.add(topB);
         //计算top
